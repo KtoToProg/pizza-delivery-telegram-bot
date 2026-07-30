@@ -101,15 +101,15 @@ python bot_code.py
 
 <table>
   <tr>
-    <td align="center"><b>Шаг 1: Главное меню</b><br><img src="./images/1 - main menu.png" width="300"></td>
-    <td align="center"><b>Шаг 2: Выбор размера</b><br><img src="./images/2-size.png" width="300"></td>
+    <td align="center"><b>Шаг 1: Главное меню</b><br><img src="./images/1-main-menu.png" width="300"></td>
+    <td align="center"><b>Шаг 2: Выбор размера</b><br><img src="./images/2%20-size.png" width="300"></td>
   </tr>
   <tr>
     <td align="center"><b>Шаг 3: Указание количества</b><br><img src="./images/3-quantity.png" width="300"></td>
     <td align="center"><b>Шаг 4: Ввод адреса</b><br><img src="./images/4-address.png" width="300"></td>
   </tr>
   <tr>
-    <td align="center" colspan="2"><b>Шаг 5: Подтверждение заказа</b><br><img src="./images/5-order-confirmation.png" width="300"></td>
+    <td align="center" colspan="2"><b>Шаг 5: Подтверждение заказа</b><br><img src="./images/5-order%20confirmation.png" width="300"></td>
   </tr>
 </table>
 

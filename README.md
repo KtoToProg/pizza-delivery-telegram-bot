@@ -101,7 +101,7 @@ python bot_code.py
 
 <table>
   <tr>
-    <td align="center"><b>Шаг 1: Главное меню</b><br><img src="./images/1-main menu.png" width="300"></td>
+    <td align="center"><b>Шаг 1: Главное меню</b><br><img src="./images/1-main-menu.png" width="300"></td>
     <td align="center"><b>Шаг 2: Выбор размера</b><br><img src="./images/2%20-size.png" width="300"></td>
   </tr>
   <tr>

@@ -8,7 +8,6 @@ import json
 import os
 import time
 
-# --- Настройки Google Sheets ---
 SPREADSHEET_ID = '1i2k6_RWZB1VCsiYxmuy8pig9yB65OMJrhqaAjMfPImM'
 CREDENTIALS_FILE = 'credentials.json'
 BACKUP_FILE = 'orders_backup.json'
@@ -93,19 +92,14 @@ def retry_failed_orders():
 
 ADMIN_CHAT_ID = 5544677633
 
-# ============================================================
-# Cloudflare Worker как прокси для Telegram API
-# ============================================================
 TELEGRAM_API_PROXY_URL = "https://rapid-bar-672d.kto696876.workers.dev"
 
-# Перенаправляем ВСЕ запросы бота через Cloudflare Worker
 telebot.apihelper.API_URL = f"{TELEGRAM_API_PROXY_URL}/bot{{0}}/{{1}}"
 
 telebot.apihelper.READ_TIMEOUT = 60
 
 bot = telebot.TeleBot('8403327210:AAFZVWCHvrhIRq050DJTzxyJ7XmPzUA4CUw')
 
-# Инициализация Google Sheets
 try:
     sheet = init_google_sheets()
     print("✅ Подключение к Google Sheets успешно")
@@ -114,9 +108,6 @@ except Exception as e:
     print(f"❌ Ошибка подключения к Google Sheets: {e}")
     sheet = None
 
-# ============================================================
-# i18n: данные переводов
-# ============================================================
 DEFAULT_LANG = 'ru'
 
 PIZZAS = {
@@ -214,7 +205,6 @@ TRANSLATIONS = {
     },
 }
 
-# Глобальные словари
 user_language = {}
 user_data = {}
 user_state = {}
@@ -234,7 +224,6 @@ def size_label(size_key, chat_id):
     return SIZES.get(size_key, {}).get(get_lang(chat_id), size_key)
 
 
-# ---------- Клавиатуры ----------
 def get_language_keyboard():
     keyboard = types.InlineKeyboardMarkup(row_width=2)
     btn_ru = types.InlineKeyboardButton("🇷🇺 Русский", callback_data="lang_ru")
@@ -297,9 +286,8 @@ def get_confirmation_keyboard(chat_id):
     return keyboard
 
 
-# ---------- Хелперы для меню ----------
 def send_language_selection(chat_id, edit_message_id=None):
-    text = TRANSLATIONS['ru']['language_selection']  # bilingual
+    text = TRANSLATIONS['ru']['language_selection'] 
     if edit_message_id:
         bot.edit_message_text(chat_id=chat_id, message_id=edit_message_id,
                               text=text, reply_markup=get_language_keyboard())
@@ -315,7 +303,6 @@ def send_pizza_menu(chat_id, name, edit_message_id=None):
         bot.send_message(chat_id, text, reply_markup=get_pizza_keyboard(chat_id))
 
 
-# ---------- Команды ----------
 @bot.message_handler(commands=['start', 'hello', 'привет'])
 def main(message):
     chat_id = message.chat.id
@@ -329,7 +316,6 @@ def change_language(message):
     send_language_selection(message.chat.id)
 
 
-# ---------- Обработчик нажатий ----------
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
     bot.answer_callback_query(call.id)
@@ -337,7 +323,6 @@ def callback_handler(call):
     chat_id = call.message.chat.id
     msg_id = call.message.message_id
 
-    # --- Смена языка ---
     if data.startswith("lang_"):
         lang = data.replace("lang_", "")
         if lang in ('ru', 'en'):
@@ -345,7 +330,6 @@ def callback_handler(call):
             send_pizza_menu(chat_id, call.from_user.first_name, edit_message_id=msg_id)
         return
 
-    # Назад к пицце
     if data == "back_to_pizza":
         bot.edit_message_text(
             chat_id=chat_id,
@@ -355,7 +339,6 @@ def callback_handler(call):
         )
         return
 
-    # Выбор пиццы
     elif data.startswith("pizza_"):
         pizza_key = data.replace("pizza_", "")
         if pizza_key not in PIZZAS:
@@ -368,7 +351,6 @@ def callback_handler(call):
         )
         return
 
-    # Выбор размера
     elif "_size_" in data:
         pizza_key, size_key = data.split("_size_")
         user_data[chat_id] = {'pizza': pizza_key, 'size': size_key}
@@ -383,7 +365,6 @@ def callback_handler(call):
         )
         return
 
-    # Назад к размеру
     elif data == "back_to_size":
         pizza_key = user_data.get(chat_id, {}).get('pizza', '')
         if pizza_key:
@@ -403,7 +384,6 @@ def callback_handler(call):
             )
         return
 
-    # Назад к количеству
     elif data == "back_to_quantity":
         pizza_key = user_data.get(chat_id, {}).get('pizza', '')
         size_key = user_data.get(chat_id, {}).get('size', '')
@@ -428,7 +408,6 @@ def callback_handler(call):
             )
         return
 
-    # Назад к адресу
     elif data == "back_to_address":
         d = user_data.get(chat_id, {})
         pizza_key, size_key, qty = d.get('pizza'), d.get('size'), d.get('quantity')
@@ -452,7 +431,6 @@ def callback_handler(call):
             )
         return
 
-    # Назад к телефону
     elif data == "back_to_phone":
         d = user_data.get(chat_id, {})
         pizza_key, size_key = d.get('pizza'), d.get('size')
@@ -477,7 +455,6 @@ def callback_handler(call):
             )
         return
 
-    # Подтверждение заказа
     elif data == "confirm_order":
         d = user_data.get(chat_id, {})
         pizza_key = d.get('pizza')
@@ -487,7 +464,6 @@ def callback_handler(call):
         phone = d.get('phone')
 
         if pizza_key and size_key and quantity and address and phone:
-            # Данные для Sheets остаются на русском (совместимость с уже накопленными строками)
             order_data = {
                 'user_name': call.from_user.first_name or 'Аноним',
                 'pizza': PIZZAS[pizza_key]['ru'],
@@ -497,7 +473,6 @@ def callback_handler(call):
                 'phone': phone
             }
 
-            # --- 1. Уведомление админу (на английском + пометка языка клиента) ---
             admin_text = (
                 f"<b>🆕 New order!</b>\n\n"
                 f"🍕 Pizza: {PIZZAS[pizza_key]['en']}\n"
@@ -515,7 +490,6 @@ def callback_handler(call):
                 print(f"❌ Ошибка отправки админу: {e}")
                 admin_ok = False
 
-            # --- 2. Запись в Google Sheets ---
             if sheet is not None:
                 success = write_order_with_retry(sheet, order_data, max_retries=3, delay=5)
                 if success:
@@ -527,7 +501,6 @@ def callback_handler(call):
                 save_order_backup(order_data)
                 sheet_ok = False
 
-            # --- 3. Сообщение пользователю ---
             user_text = t(chat_id, 'order_accepted')
             if not admin_ok:
                 user_text += t(chat_id, 'order_admin_issue')
@@ -541,7 +514,6 @@ def callback_handler(call):
                 reply_markup=None
             )
 
-            # --- 4. Очистка ---
             if chat_id in user_data:
                 del user_data[chat_id]
             user_state[chat_id] = None
@@ -557,7 +529,6 @@ def callback_handler(call):
             user_state[chat_id] = None
         return
 
-    # Отмена заказа
     elif data == "cancel_order":
         bot.edit_message_text(
             chat_id=chat_id,
@@ -571,7 +542,6 @@ def callback_handler(call):
         return
 
 
-# ---------- Текстовые сообщения ----------
 @bot.message_handler(func=lambda message: True)
 def handle_text(message):
     chat_id = message.chat.id
@@ -629,7 +599,6 @@ def handle_text(message):
         bot.send_message(chat_id, t(chat_id, 'use_buttons'))
 
 
-# ---------- Запуск ----------
 if __name__ == '__main__':
     print(f"🌐 Используем Cloudflare Worker: {TELEGRAM_API_PROXY_URL}")
     print(f"🔗 API URL: {telebot.apihelper.API_URL}")

@@ -121,22 +121,17 @@ Bot is running. Waiting for updates...
 
 ## 📁 Project Structure
 
-```
+```text
 Train tg bot 3/
-├── main.py                  # Main bot code
-├── requirements.txt         # Python dependencies
-├── .env                     # Secrets (not committed)
+├── images/                  # Screenshots used in this README
 ├── .env.example             # Variables template
 ├── .gitignore               # Git exclusions
 ├── LICENSE                  # MIT License
 ├── README.md                # This file
-├── credentials.json         # Google key (not committed)
-├── orders_backup.json       # Created by the bot on failures
-└── docs/
-    ├── architecture.md      # Detailed architecture
-    ├── cloudflare-worker.md # Cloudflare Worker setup
-    └── screenshots/         # Screenshots used in this README
+├── main.py                  # Main bot code
+└── requirements.txt         # Python dependencies
 ```
+*(Note: `.env`, `credentials.json`, and `orders_backup.json` are omitted here because they are ignored by Git and only exist locally).*
 
 ## ⚙️ How It Works
 
@@ -315,22 +310,17 @@ python main.py
 
 ## 📁 Структура проекта
 
-```
+```text
 Train tg bot 3/
-├── main.py                  # Основной код бота
-├── requirements.txt         # Зависимости Python
-├── .env                     # Секреты (не коммитится)
+├── images/                  # Скриншоты для README
 ├── .env.example             # Шаблон переменных
 ├── .gitignore               # Исключения для Git
 ├── LICENSE                  # MIT License
 ├── README.md                # Этот файл
-├── credentials.json         # Ключ Google (не коммитится)
-├── orders_backup.json       # Создаётся ботом при сбоях
-└── docs/
-    ├── architecture.md      # Подробное описание архитектуры
-    ├── cloudflare-worker.md # Настройка Cloudflare Worker
-    └── screenshots/         # Скриншоты для README
+├── main.py              # Основной код бота
+└── requirements.txt         # Зависимости Python
 ```
+*(Примечание: `.env`, `credentials.json` и `orders_backup.json` отсутствуют в репозитории, так как добавлены в `.gitignore` и существуют только локально).*
 
 ## ⚙️ Как это работает
 

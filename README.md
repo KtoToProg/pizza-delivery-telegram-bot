@@ -1,116 +1,388 @@
-# PizzaOrderBot
+=== ФАЙЛ: README.en.md ===
 
-A Telegram bot for ordering pizza, featuring user-friendly navigation, input validation, and real-time notifications to the administrator about new orders.
+# 🍕 Pizza Ordering Telegram Bot
 
-## 🚀 How to Run the Bot
+Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and English, logs orders to Google Sheets, notifies the administrator, and uses a Cloudflare Worker as a stable proxy for the Telegram API.
 
-To run this bot on your local machine, follow these steps:
+[Русская версия →](README.md)
 
-### 1. Download the Code
-Clone this repository to your PC or download it as a ZIP archive and extract it to a convenient location.
+## 📋 Table of Contents
 
-### 2. Install Dependencies
-Open your terminal in the project folder and install the required library for working with Telegram:
+- [Demo](#-demo)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Installation](#-installation)
+- [Run](#-run)
+- [Project Structure](#-project-structure)
+- [How It Works](#-how-it-works)
+- [License](#-license)
+
+## 🎬 Demo
+
+<!-- Replace the placeholders below with your own screenshots -->
+
+| Language selection | Pizza choice | Size selection |
+|:---:|:---:|:---:|
+| ![](docs/screenshots/01-language.png) | ![](docs/screenshots/02-pizza.png) | ![](docs/screenshots/03-size.png) |
+
+| Order review | Confirmation | Admin notification |
+|:---:|:---:|:---:|
+| ![](docs/screenshots/04-review.png) | ![](docs/screenshots/05-success.png) | ![](docs/screenshots/06-admin.png) |
+
+| Google Sheets log |
+|:---:|
+| ![](docs/screenshots/07-sheets.png) |
+
+## ✨ Features
+
+- **Bilingual interface (RU/EN)** — switch language at any time via `/language`
+- **Step-by-step ordering** — pizza → size → quantity → address → phone → confirmation
+- **Back navigation** — return to any step to correct data
+- **Input validation** — quantity, address, and phone are validated with clear error messages in the selected language
+- **Google Sheets logging** — every order is saved with a timestamp
+- **Admin notifications** — new orders are sent to the admin in English with a note about the client's language
+- **Fault tolerance** — multi-layer retry, local backup, and automatic recovery (see [How It Works](#-how-it-works))
+- **Cloudflare Worker as a proxy** — stable access to the Telegram API without a local SOCKS proxy
+
+## 🛠️ Tech Stack
+
+| Component | Purpose |
+|-----------|---------|
+| Python 3.10+ | Development language |
+| pyTelegramBotAPI (telebot) | Telegram Bot API wrapper |
+| gspread + oauth2client | Google Sheets integration |
+| python-dotenv | Load variables from `.env` |
+| Cloudflare Workers | Telegram API proxy |
+
+## 🚀 Installation
+
+### 1. Clone the repository
+
 ```bash
-pip install pyTelegramBotAPI
+git clone <YOUR_REPO_URL>
+cd "Train tg bot 3"
 ```
 
-If Telegram is unavailable in your region without a proxy, also install the SOCKS5 proxy support library:
+### 2. Create a virtual environment
+
 ```bash
-pip install pysocks
+python -m venv venv
 ```
 
-### 3. Configure Your Data (Placeholders)
-Open the `bot_code.py` file using any text editor or IDE (like PyCharm) and replace the demo placeholder values with your real data:
-
-* Instead of `"YOUR_TELEGRAM_TOKEN"`, insert your actual bot token received from `@BotFather`.
-* Instead of `"YOUR CHAT ID"`, specify your real Telegram ID (you can find it via `@userinfobot`).
-* If you need a proxy, replace `"YOUR PROXY (IF TELEGRAM IS UNAVAILABLE IN YOUR REGION)"` with your proxy address. If a proxy is not required, simply comment out or delete the proxy configuration line.
-
-### 4. Run the Bot
-Make sure your Tor client is running on your computer (if you use a proxy) and execute the bot file:
-```bash
-python bot_code.py
+Windows:
+```cmd
+venv\Scripts\activate
 ```
 
-Once launched, the bot will automatically restart in case of errors. You will see the message: "Бот запущен. Ожидание обновлений...".
-
----
-
-### NOTE!
-You can test my bot in action by following this link: [@Delivery_23726_bot](https://t.me). Please note that it may be temporarily unavailable, as I do not guarantee 24/7 uptime.
-
-If the bot does not respond, simply run it locally following the instructions above — the code is fully functional.
-
----
-
-<details>
-<summary><b>🇷🇺 Читать описание на русском языке (Click to expand)</b></summary>
-
-# PizzaOrderBot
-
-Телеграм-бот для заказа пиццы с удобной навигацией, проверкой ввода и уведомлением администратора о новом заказе.
-
-## 🚀 Как запустить бота
-
-Чтобы запустить этого бота на своем компьютере, выполните следующие шаги:
-
-### 1. Скачайте код
-Склонируйте этот репозиторий к себе на ПК или скачайте его в виде ZIP-архива и распакуйте в удобное место.
-
-### 2. Установите зависимости
-Откройте терминал в папке проекта и установите библиотеку для работы с Telegram:
+Linux / macOS:
 ```bash
-pip install pyTelegramBotAPI
+source venv/bin/activate
 ```
 
-Если в вашем регионе Telegram недоступен без прокси, также установите библиотеку для работы с SOCKS5:
+### 3. Install dependencies
+
 ```bash
-pip install pysocks
+pip install -r requirements.txt
 ```
 
-### 3. Настройте свои данные (Заглушки)
-Откройте файл `bot_code.py` через любой текстовый редактор или среду разработки (PyCharm) и замените демонстрационные данные на свои реальные:
+### 4. Configure `.env`
 
-* Вместо `"YOUR_TELEGRAM_TOKEN"` вставьте токен вашего бота, полученный от `@BotFather`.
-* Вместо `"YOUR CHAT ID"` укажите ваш реальный Telegram ID (его можно узнать у бота `@userinfobot`).
-* Если вам нужен прокси – замените `"YOUR PROXY (IF TELEGRAM IS UNAVAILABLE IN YOUR REGION)"` на адрес вашего прокси. Если прокси не требуется, просто закомментируйте или удалите строку с настройкой прокси.
+Copy `.env.example` to `.env`:
 
-### 4. Запуск
-Убедитесь, что на вашем компьютере запущен Tor-клиент (если вы используете прокси), и запустите файл бота:
-```bash
-python bot_code.py
+```cmd
+copy .env.example .env
 ```
 
-После запуска бот будет автоматически перезапускаться при сбоях – вы увидите сообщение «Бот запущен. Ожидание обновлений...».
+Open `.env` and fill in your values following the comments in `.env.example`.
 
----
+### 5. Place `credentials.json`
 
-### ПРИМЕЧАНИЕ!
-Вы можете протестировать моего бота в деле по ссылке [@Delivery_23726_bot](https://t.me), но учтите, что он может быть временно недоступен, так как я не гарантирую его круглосуточную работу.
+Download the Google Service Account key from Google Cloud Console and place it in the project root next to `main.py`.
 
-Если бот не отвечает, просто запустите его локально, следуя инструкции выше – код полностью рабочий.
+### 6. Set up Cloudflare Worker
 
-</details>
+Deploy the Worker (see `docs/cloudflare-worker.md`) or use an existing one. Put the Worker URL in `.env` as `TELEGRAM_API_PROXY_URL`.
 
-## 📸 Процесс оформления заказа в боте
+## ▶️ Run
 
-<details>
-<summary>🗺 <b>Нажмите, чтобы посмотреть пошаговые скриншоты работы бота</b></summary>
-<br>
+```bash
+python main.py
+```
 
-<table>
-  <tr>
-    <td align="center"><b>Шаг 1: Главное меню</b><br><img src="./images/1-main-menu.png" width="300"></td>
-    <td align="center"><b>Шаг 2: Выбор размера</b><br><img src="./images/2-size.png" width="300"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Шаг 3: Указание количества</b><br><img src="./images/3-quantity.png" width="300"></td>
-    <td align="center"><b>Шаг 4: Ввод адреса</b><br><img src="./images/4-address.png" width="300"></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2"><b>Шаг 5: Подтверждение заказа</b><br><img src="./images/5-order-confirmation.png" width="300"></td>
-  </tr>
-</table>
+Expected output:
 
-</details>
+```
+🌐 Using Cloudflare Worker: https://rapid-bar-672d.kto696876.workers.dev
+🔗 API URL: https://rapid-bar-672d.kto696876.workers.dev/bot{0}/{1}
+✅ Connected to Google Sheets
+Bot is running. Waiting for updates...
+```
+
+## 📁 Project Structure
+
+```
+Train tg bot 3/
+├── main.py                  # Main bot code
+├── requirements.txt         # Python dependencies
+├── .env                     # Secrets (not committed)
+├── .env.example             # Variables template
+├── .gitignore               # Git exclusions
+├── LICENSE                  # MIT License
+├── README.md                # Russian version
+├── README.en.md             # This file
+├── credentials.json         # Google key (not committed)
+├── orders_backup.json       # Created by the bot on failures
+└── docs/
+    ├── architecture.md      # Detailed architecture
+    ├── cloudflare-worker.md # Cloudflare Worker setup
+    └── screenshots/         # Screenshots used in this README
+```
+
+## ⚙️ How It Works
+
+### Bilingualism
+
+All UI strings are stored in the `TRANSLATIONS` dictionary with `ru` and `en` keys. The function `t(chat_id, key, **kwargs)` returns the string in the user's language (Russian by default). The selected language is stored in `user_language[chat_id]` and switched via 🇷🇺 / 🇬🇧 buttons.
+
+### Bypassing blocks via Cloudflare
+
+Instead of an unstable local SOCKS proxy, the bot uses a Cloudflare Worker as a reverse proxy. In the code this is one line:
+
+```python
+telebot.apihelper.API_URL = f"{TELEGRAM_API_PROXY_URL}/bot{{0}}/{{1}}"
+```
+
+All requests to `api.telegram.org` go through `https://<worker>.workers.dev`. If the Worker's URL ever changes, only one line in the code and one variable in `.env` need to be updated — nothing else.
+
+### Fault tolerance
+
+The bot is designed to keep accepting orders even when external services fail. Every failure is handled in layers:
+
+**1. Retries with delays (Google Sheets)**
+
+If Google Sheets rejects a write (network error, quota, temporary outage), the bot retries **3 times with a 5-second pause** between attempts. This covers most short-lived issues without bothering the user.
+
+**2. Local backup file (`orders_backup.json`)**
+
+If all retries fail, the order is not lost — it is saved to a local JSON file. The file survives bot restarts and accumulates undelivered orders until Google Sheets becomes available again.
+
+**3. Automatic retry on startup**
+
+Every time the bot starts, `retry_failed_orders()` reads the backup file and tries to resend every stored order — **2 attempts per order with a 3-second delay**. Successful orders are removed from the file, failed ones stay for the next startup. When the file becomes empty, it is deleted automatically.
+
+**4. Independent failure tracking**
+
+Sending to the admin and writing to Google Sheets are handled **independently**. The user always receives their order confirmation, but the message is adjusted based on what actually happened:
+
+- Both OK → `✅ Thank you! Your order has been accepted.`
+- Admin notification failed → `…However, there was a problem notifying the administrator. We will contact you soon.`
+- Sheets write failed → `…Your order has been saved, but there may be a slight delay in processing. The administrator will contact you.`
+
+This way the user is never left without feedback, and the message honestly reflects the real state of the order.
+
+**5. Auto-restart on crash**
+
+The main loop is wrapped in `try/except` with a 5-second delay before restart. Any unhandled exception in `bot.polling()` does not kill the process — the bot simply reconnects.
+
+**6. Startup resilience**
+
+If Google Sheets cannot be initialized at startup (network, credentials, quota), the bot does **not** crash — it continues to run with `sheet = None`. In this mode, every new order goes straight to the backup file, and admin notifications still work. When the bot restarts and the connection is restored, all pending orders are flushed to Sheets.
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE).
+
+
+=== ФАЙЛ: README.md ===
+
+# 🍕 Pizza Ordering Telegram Bot
+
+Двуязычный Telegram-бот для заказа пиццы с доставкой. Поддерживает русский и английский языки, сохраняет заказы в Google Sheets, уведомляет администратора и использует Cloudflare Worker как стабильный прокси для Telegram API.
+
+[English version →](README.en.md)
+
+## 📋 Содержание
+
+- [Демо](#-демо)
+- [Возможности](#-возможности)
+- [Технологии](#-технологии)
+- [Установка](#-установка)
+- [Запуск](#-запуск)
+- [Структура проекта](#-структура-проекта)
+- [Как это работает](#-как-это-работает)
+- [Лицензия](#-лицензия)
+
+## 🎬 Демо
+
+<!-- Замените плейсхолдеры на свои скриншоты -->
+
+| Выбор языка | Выбор пиццы | Выбор размера |
+|:---:|:---:|:---:|
+| ![](docs/screenshots/01-language.png) | ![](docs/screenshots/02-pizza.png) | ![](docs/screenshots/03-size.png) |
+
+| Проверка заказа | Подтверждение | Уведомление админу |
+|:---:|:---:|:---:|
+| ![](docs/screenshots/04-review.png) | ![](docs/screenshots/05-success.png) | ![](docs/screenshots/06-admin.png) |
+
+| Запись в Google Sheets |
+|:---:|
+| ![](docs/screenshots/07-sheets.png) |
+
+## ✨ Возможности
+
+- **Двуязычный интерфейс (RU/EN)** — переключение языка в любой момент через `/language`
+- **Пошаговый заказ** — пицца → размер → количество → адрес → телефон → подтверждение
+- **Навигация «назад»** — можно вернуться на любой шаг и исправить данные
+- **Валидация ввода** — количество, адрес и телефон проверяются с понятными ошибками на выбранном языке
+- **Запись в Google Sheets** — все заказы сохраняются в таблицу с меткой времени
+- **Уведомления администратору** — новый заказ приходит в Telegram на английском с пометкой языка клиента
+- **Отказоустойчивость** — многослойная система повторов, локальный резерв и автовосстановление (см. [Как это работает](#-как-это-работает))
+- **Cloudflare Worker как прокси** — стабильный доступ к Telegram API без локального SOCKS-прокси
+
+## 🛠️ Технологии
+
+| Компонент | Назначение |
+|-----------|-----------|
+| Python 3.10+ | Язык разработки |
+| pyTelegramBotAPI (telebot) | Работа с Telegram Bot API |
+| gspread + oauth2client | Запись заказов в Google Sheets |
+| python-dotenv | Загрузка переменных из `.env` |
+| Cloudflare Workers | Прокси для Telegram API |
+
+## 🚀 Установка
+
+### 1. Клонировать репозиторий
+
+```bash
+git clone <URL_вашего_репозитория>
+cd "Train tg bot 3"
+```
+
+### 2. Создать виртуальное окружение
+
+```bash
+python -m venv venv
+```
+
+Windows:
+```cmd
+venv\Scripts\activate
+```
+
+Linux / macOS:
+```bash
+source venv/bin/activate
+```
+
+### 3. Установить зависимости
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Настроить `.env`
+
+Скопируйте `.env.example` в `.env`:
+
+```cmd
+copy .env.example .env
+```
+
+Откройте `.env` и заполните значения по комментариям в `.env.example`.
+
+### 5. Положить `credentials.json`
+
+Скачайте ключ Google Service Account из Google Cloud Console и положите его в корень проекта рядом с `main.py`.
+
+### 6. Настроить Cloudflare Worker
+
+Разверните Worker по инструкции `docs/cloudflare-worker.md` или используйте существующий. URL воркера укажите в `.env` как `TELEGRAM_API_PROXY_URL`.
+
+## ▶️ Запуск
+
+```bash
+python main.py
+```
+
+Ожидаемый вывод:
+
+```
+🌐 Используем Cloudflare Worker: https://rapid-bar-672d.kto696876.workers.dev
+🔗 API URL: https://rapid-bar-672d.kto696876.workers.dev/bot{0}/{1}
+✅ Подключение к Google Sheets успешно
+Бот запущен. Ожидание обновлений...
+```
+
+## 📁 Структура проекта
+
+```
+Train tg bot 3/
+├── main.py                  # Основной код бота
+├── requirements.txt         # Зависимости Python
+├── .env                     # Секреты (не коммитится)
+├── .env.example             # Шаблон переменных
+├── .gitignore               # Исключения для Git
+├── LICENSE                  # MIT License
+├── README.md                # Этот файл
+├── README.en.md             # Английская версия
+├── credentials.json         # Ключ Google (не коммитится)
+├── orders_backup.json       # Создаётся ботом при сбоях
+└── docs/
+    ├── architecture.md      # Подробное описание архитектуры
+    ├── cloudflare-worker.md # Настройка Cloudflare Worker
+    └── screenshots/         # Скриншоты для README
+```
+
+## ⚙️ Как это работает
+
+### Двуязычность
+
+Все строки интерфейса хранятся в словаре `TRANSLATIONS` с ключами `ru` и `en`. Функция `t(chat_id, key, **kwargs)` возвращает строку на языке пользователя (по умолчанию — русский). Выбранный язык хранится в `user_language[chat_id]` и меняется кнопками 🇷🇺 / 🇬🇧.
+
+### Обход блокировок через Cloudflare
+
+Вместо нестабильного локального SOCKS-прокси бот использует Cloudflare Worker как обратный прокси. В коде это одна строка:
+
+```python
+telebot.apihelper.API_URL = f"{TELEGRAM_API_PROXY_URL}/bot{{0}}/{{1}}"
+```
+
+Все запросы к `api.telegram.org` идут через `https://<worker>.workers.dev`. Если URL воркера когда-либо изменится — достаточно поправить одну строку в коде и одну переменную в `.env`, ничего больше.
+
+### Отказоустойчивость
+
+Бот спроектирован так, чтобы принимать заказы даже при сбоях внешних сервисов. Каждый сбой обрабатывается в несколько слоёв:
+
+**1. Повторные попытки с паузами (Google Sheets)**
+
+Если Google Sheets отклоняет запись (сетевая ошибка, квота, временная недоступность), бот повторяет **3 раза с паузой 5 секунд**. Это покрывает большинство коротких сбоев и не беспокоит пользователя.
+
+**2. Локальный резервный файл (`orders_backup.json`)**
+
+Если все попытки провалились, заказ не теряется — он сохраняется в локальный JSON-файл. Файл переживает перезапуск бота и накапливает неотправленные заказы, пока Google Sheets снова не станет доступен.
+
+**3. Автоматическая отправка при старте**
+
+Каждый раз при запуске `retry_failed_orders()` читает резервный файл и пытается отправить все сохранённые заказы — **2 попытки на заказ с паузой 3 секунды**. Успешные заказы удаляются из файла, неуспешные остаются до следующего запуска. Когда файл становится пустым, он удаляется автоматически.
+
+**4. Раздельный учёт сбоев**
+
+Уведомление админа и запись в Google Sheets обрабатываются **независимо**. Пользователь всегда получает подтверждение заказа, но текст сообщения адаптируется под реальную ситуацию:
+
+- Всё успешно → `✅ Спасибо! Ваш заказ принят.`
+- Уведомление админу не ушло → `…Но возникла проблема с уведомлением администратора. Мы скоро свяжемся с вами.`
+- Запись в Sheets не удалась → `…Ваш заказ сохранён, но возможна небольшая задержка в обработке. Администратор свяжется с вами.`
+
+Так пользователь никогда не остаётся без ответа, а сообщение честно отражает состояние заказа.
+
+**5. Автоперезапуск при падении**
+
+Основной цикл обёрнут в `try/except` с паузой 5 секунд перед перезапуском. Любое необработанное исключение в `bot.polling()` не убивает процесс — бот просто переподключается.
+
+**6. Устойчивость на старте**
+
+Если Google Sheets не удаётся инициализировать при запуске (сеть, ключ, квота), бот **не падает** — он продолжает работать с `sheet = None`. В этом режиме каждый новый заказ идёт сразу в резервный файл, а уведомления админу продолжают работать. При следующем запуске, когда соединение восстановится, все накопленные заказы уйдут в Sheets.
+
+## 📄 Лицензия
+
+MIT — см. [LICENSE](LICENSE).

@@ -19,15 +19,19 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 
 | Start & Language Selection | Pizza Menu | Size Selection |
 |:---:|:---:|:---:|
-| ![Start](images/screenshot1.png) | ![Language](docs/screenshots/02_language.png) | ![Size](docs/screenshots/03_size.png) |
+| ![Start](images/screenshot1.png) | ![Language](images/Screenshot2ENG.png) | ![Size](images/Screenshot3ENG.png) |
 
 | Quantity Input | Address Input | Phone Input |
 |:---:|:---:|:---:|
-| ![Quantity](docs/screenshots/04_quantity.png) | ![Address](docs/screenshots/05_address.png) | ![Phone](docs/screenshots/06_phone.png) |
+| ![Quantity](images/Screenshot4ENG.png) | ![Address](images/Screenshot5ENG.png) | ![Phone](images/Screenshot6ENG.png) |
 
 | Order Review | Order Cancellation | Admin Notification |
 |:---:|:---:|:---:|
-| ![Review](docs/screenshots/07_review.png) | ![Cancel](docs/screenshots/08_cancel.png) | ![Admin](docs/screenshots/09_admin.png) |
+| ![Review](images/Screenshot7ENG.png) | ![Cancel](images/Screenshot8ENG.png) | ![Admin](images/Screenshot9ENG.png) |
+
+| Order Review |
+|:---:|:---:|:---:|
+| ![Review](images/screenshot10.png) |
 
 ## ✨ Features
 

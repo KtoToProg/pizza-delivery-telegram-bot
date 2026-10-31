@@ -1,10 +1,8 @@
-=== ФАЙЛ: README.en.md ===
-
 # 🍕 Pizza Ordering Telegram Bot
 
-Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and English, logs orders to Google Sheets, notifies the administrator, and uses a Cloudflare Worker as a stable proxy for the Telegram API.
+> 🌐 English version below — Русская версия ниже
 
-[Русская версия →](README.md)
+Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and English, logs orders to Google Sheets, notifies the administrator, and uses a Cloudflare Worker as a stable proxy for the Telegram API.
 
 ## 📋 Table of Contents
 
@@ -128,8 +126,7 @@ Train tg bot 3/
 ├── .env.example             # Variables template
 ├── .gitignore               # Git exclusions
 ├── LICENSE                  # MIT License
-├── README.md                # Russian version
-├── README.en.md             # This file
+├── README.md                # This file
 ├── credentials.json         # Google key (not committed)
 ├── orders_backup.json       # Created by the bot on failures
 └── docs/
@@ -192,14 +189,11 @@ If Google Sheets cannot be initialized at startup (network, credentials, quota),
 
 MIT — see [LICENSE](LICENSE).
 
-
-=== ФАЙЛ: README.md ===
+---
 
 # 🍕 Pizza Ordering Telegram Bot
 
 Двуязычный Telegram-бот для заказа пиццы с доставкой. Поддерживает русский и английский языки, сохраняет заказы в Google Sheets, уведомляет администратора и использует Cloudflare Worker как стабильный прокси для Telegram API.
-
-[English version →](README.en.md)
 
 ## 📋 Содержание
 
@@ -324,7 +318,6 @@ Train tg bot 3/
 ├── .gitignore               # Исключения для Git
 ├── LICENSE                  # MIT License
 ├── README.md                # Этот файл
-├── README.en.md             # Английская версия
 ├── credentials.json         # Ключ Google (не коммитится)
 ├── orders_backup.json       # Создаётся ботом при сбоях
 └── docs/

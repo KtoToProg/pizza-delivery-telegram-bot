@@ -317,7 +317,7 @@ pizza-delivery-telegram-bot/
 ├── .gitignore               # Исключения для Git
 ├── LICENSE                  # MIT License
 ├── README.md                # Этот файл
-├── main.py              # Основной код бота
+├── main.py                  # Основной код бота
 └── requirements.txt         # Зависимости Python
 ```
 *(Примечание: `.env`, `credentials.json` и `orders_backup.json` отсутствуют в репозитории, так как добавлены в `.gitignore` и существуют только локально).*

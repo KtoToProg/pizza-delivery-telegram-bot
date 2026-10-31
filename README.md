@@ -17,25 +17,24 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 
 ## 🎬 Demo
 
-<!-- Replace the placeholders below with your own screenshots -->
-
-| Language selection | Pizza choice | Size selection |
+| Start & Pizza Menu | Language Selection | Size Selection |
 |:---:|:---:|:---:|
-| ![](docs/screenshots/01-language.png) | ![](docs/screenshots/02-pizza.png) | ![](docs/screenshots/03-size.png) |
+| ![Start](docs/screenshots/01_start.png) | ![Language](docs/screenshots/02_language.png) | ![Size](docs/screenshots/03_size.png) |
 
-| Order review | Confirmation | Admin notification |
+| Quantity Input | Address Input | Phone Input |
 |:---:|:---:|:---:|
-| ![](docs/screenshots/04-review.png) | ![](docs/screenshots/05-success.png) | ![](docs/screenshots/06-admin.png) |
+| ![Quantity](docs/screenshots/04_quantity.png) | ![Address](docs/screenshots/05_address.png) | ![Phone](docs/screenshots/06_phone.png) |
 
-| Google Sheets log |
-|:---:|
-| ![](docs/screenshots/07-sheets.png) |
+| Order Review | Order Cancellation | Admin Notification |
+|:---:|:---:|:---:|
+| ![Review](docs/screenshots/07_review.png) | ![Cancel](docs/screenshots/08_cancel.png) | ![Admin](docs/screenshots/09_admin.png) |
 
 ## ✨ Features
 
 - **Bilingual interface (RU/EN)** — switch language at any time via `/language`
 - **Step-by-step ordering** — pizza → size → quantity → address → phone → confirmation
 - **Back navigation** — return to any step to correct data
+- **Order cancellation** — cancel the order at any time before confirmation
 - **Input validation** — quantity, address, and phone are validated with clear error messages in the selected language
 - **Google Sheets logging** — every order is saved with a timestamp
 - **Admin notifications** — new orders are sent to the admin in English with a note about the client's language
@@ -208,25 +207,24 @@ MIT — see [LICENSE](LICENSE).
 
 ## 🎬 Демо
 
-<!-- Замените плейсхолдеры на свои скриншоты -->
-
-| Выбор языка | Выбор пиццы | Выбор размера |
+| Главное меню и выбор пиццы | Выбор языка | Выбор размера |
 |:---:|:---:|:---:|
-| ![](docs/screenshots/01-language.png) | ![](docs/screenshots/02-pizza.png) | ![](docs/screenshots/03-size.png) |
+| ![Главное меню](docs/screenshots/01_start.png) | ![Выбор языка](docs/screenshots/02_language.png) | ![Выбор размера](docs/screenshots/03_size.png) |
 
-| Проверка заказа | Подтверждение | Уведомление админу |
+| Ввод количества | Ввод адреса | Ввод телефона |
 |:---:|:---:|:---:|
-| ![](docs/screenshots/04-review.png) | ![](docs/screenshots/05-success.png) | ![](docs/screenshots/06-admin.png) |
+| ![Ввод количества](docs/screenshots/04_quantity.png) | ![Ввод адреса](docs/screenshots/05_address.png) | ![Ввод телефона](docs/screenshots/06_phone.png) |
 
-| Запись в Google Sheets |
-|:---:|
-| ![](docs/screenshots/07-sheets.png) |
+| Проверка заказа | Отмена заказа | Уведомление админу |
+|:---:|:---:|:---:|
+| ![Проверка заказа](docs/screenshots/07_review.png) | ![Отмена заказа](docs/screenshots/08_cancel.png) | ![Уведомление админу](docs/screenshots/09_admin.png) |
 
 ## ✨ Возможности
 
 - **Двуязычный интерфейс (RU/EN)** — переключение языка в любой момент через `/language`
 - **Пошаговый заказ** — пицца → размер → количество → адрес → телефон → подтверждение
 - **Навигация «назад»** — можно вернуться на любой шаг и исправить данные
+- **Отмена заказа** — можно отменить оформление на любом этапе до подтверждения
 - **Валидация ввода** — количество, адрес и телефон проверяются с понятными ошибками на выбранном языке
 - **Запись в Google Sheets** — все заказы сохраняются в таблицу с меткой времени
 - **Уведомления администратору** — новый заказ приходит в Telegram на английском с пометкой языка клиента

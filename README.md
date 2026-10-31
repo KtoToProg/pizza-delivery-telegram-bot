@@ -6,15 +6,16 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 
 ## 📋 Table of Contents
 
-- [Demo](#-demo)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Installation](#-installation)
-- [Run](#-run)
-- [Project Structure](#-project-structure)
-- [How It Works](#-how-it-works)
-- [License](#-license)
+- [Demo](#demo)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Run](#run)
+- [Project Structure](#project-structure)
+- [How It Works](#how-it-works)
+- [License](#license)
 
+<a id="demo"></a>
 ## 🎬 Demo
 
 | Start & Language Selection | Pizza Menu | Size Selection |
@@ -33,6 +34,7 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 |:---:|
 | ![](images/screenshot10.png) |
 
+<a id="features"></a>
 ## ✨ Features
 
 - **Bilingual interface (RU/EN)** — switch language at any time via `/language`
@@ -42,9 +44,10 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 - **Input validation** — quantity, address, and phone are validated with clear error messages in the selected language
 - **Google Sheets logging** — every order is saved with a timestamp
 - **Admin notifications** — new orders are sent to the admin in English with a note about the client's language
-- **Fault tolerance** — multi-layer retry, local backup, and automatic recovery (see [How It Works](#-how-it-works))
+- **Fault tolerance** — multi-layer retry, local backup, and automatic recovery (see [How It Works](#how-it-works))
 - **Cloudflare Worker as a proxy** — stable access to the Telegram API without a local SOCKS proxy
 
+<a id="tech-stack"></a>
 ## 🛠️ Tech Stack
 
 | Component | Purpose |
@@ -55,6 +58,7 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 | python-dotenv | Load variables from `.env` |
 | Cloudflare Workers | Telegram API proxy |
 
+<a id="installation"></a>
 ## 🚀 Installation
 
 ### 1. Clone the repository
@@ -104,6 +108,7 @@ Download the Google Service Account key from Google Cloud Console and place it i
 
 Deploy your Cloudflare Worker or use an existing one. Put the Worker URL in `.env` as `TELEGRAM_API_PROXY_URL`.
 
+<a id="run"></a>
 ## ▶️ Run
 
 ```bash
@@ -119,6 +124,7 @@ Expected output:
 Bot is running. Waiting for updates...
 ```
 
+<a id="project-structure"></a>
 ## 📁 Project Structure
 
 ```text
@@ -133,6 +139,7 @@ pizza-delivery-telegram-bot/
 ```
 *(Note: `.env`, `credentials.json`, and `orders_backup.json` are omitted here because they are ignored by Git and only exist locally).*
 
+<a id="how-it-works"></a>
 ## ⚙️ How It Works
 
 ### Bilingualism
@@ -183,6 +190,7 @@ The main loop is wrapped in `try/except` with a 5-second delay before restart. A
 
 If Google Sheets cannot be initialized at startup (network, credentials, quota), the bot does **not** crash — it continues to run with `sheet = None`. In this mode, every new order goes straight to the backup file, and admin notifications still work. When the bot restarts and the connection is restored, all pending orders are flushed to Sheets.
 
+<a id="license"></a>
 ## 📄 License
 
 MIT — see [LICENSE](LICENSE).
@@ -195,15 +203,16 @@ MIT — see [LICENSE](LICENSE).
 
 ## 📋 Содержание
 
-- [Демо](#-демо)
-- [Возможности](#-возможности)
-- [Технологии](#-технологии)
-- [Установка](#-установка)
-- [Запуск](#-запуск)
-- [Структура проекта](#-структура-проекта)
-- [Как это работает](#-как-это-работает)
-- [Лицензия](#-лицензия)
+- [Демо](#демо)
+- [Возможности](#возможности)
+- [Технологии](#технологии)
+- [Установка](#установка)
+- [Запуск](#запуск)
+- [Структура проекта](#структура-проекта)
+- [Как это работает](#как-это-работает)
+- [Лицензия](#лицензия)
 
+<a id="демо"></a>
 ## 🎬 Демо
 
 | Главное меню и Выбор языка | Выбор пиццы | Выбор размера |
@@ -222,6 +231,7 @@ MIT — see [LICENSE](LICENSE).
 |:---:|
 | ![](images/screenshot10.png) |
 
+<a id="возможности"></a>
 ## ✨ Возможности
 
 - **Двуязычный интерфейс (RU/EN)** — переключение языка в любой момент через `/language`
@@ -231,9 +241,10 @@ MIT — see [LICENSE](LICENSE).
 - **Валидация ввода** — количество, адрес и телефон проверяются с понятными ошибками на выбранном языке
 - **Запись в Google Sheets** — все заказы сохраняются в таблицу с меткой времени
 - **Уведомления администратору** — новый заказ приходит в Telegram на английском с пометкой языка клиента
-- **Отказоустойчивость** — многослойная система повторов, локальный резерв и автовосстановление (см. [Как это работает](#-как-это-работает))
+- **Отказоустойчивость** — многослойная система повторов, локальный резерв и автовосстановление (см. [Как это работает](#как-это-работает))
 - **Cloudflare Worker как прокси** — стабильный доступ к Telegram API без локального SOCKS-прокси
 
+<a id="технологии"></a>
 ## 🛠️ Технологии
 
 | Компонент | Назначение |
@@ -244,6 +255,7 @@ MIT — see [LICENSE](LICENSE).
 | python-dotenv | Загрузка переменных из `.env` |
 | Cloudflare Workers | Прокси для Telegram API |
 
+<a id="установка"></a>
 ## 🚀 Установка
 
 ### 1. Клонировать репозиторий
@@ -293,6 +305,7 @@ copy .env.example .env
 
 Разверните ваш Worker или используйте существующий. URL воркера укажите в `.env` как `TELEGRAM_API_PROXY_URL`.
 
+<a id="запуск"></a>
 ## ▶️ Запуск
 
 ```bash
@@ -308,6 +321,7 @@ python main.py
 Бот запущен. Ожидание обновлений...
 ```
 
+<a id="структура-проекта"></a>
 ## 📁 Структура проекта
 
 ```text
@@ -322,6 +336,7 @@ pizza-delivery-telegram-bot/
 ```
 *(Примечание: `.env`, `credentials.json` и `orders_backup.json` отсутствуют в репозитории, так как добавлены в `.gitignore` и существуют только локально).*
 
+<a id="как-это-работает"></a>
 ## ⚙️ Как это работает
 
 ### Двуязычность
@@ -372,6 +387,7 @@ telebot.apihelper.API_URL = f"{TELEGRAM_API_PROXY_URL}/bot{{0}}/{{1}}"
 
 Если Google Sheets не удаётся инициализировать при запуске (сеть, ключ, квота), бот **не падает** — он продолжает работать с `sheet = None`. В этом режиме каждый новый заказ идёт сразу в резервный файл, а уведомления админу продолжают работать. При следующем запуске, когда соединение восстановится, все накопленные заказы уйдут в Sheets.
 
+<a id="лицензия"></a>
 ## 📄 Лицензия
 
 MIT — см. [LICENSE](LICENSE).

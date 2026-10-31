@@ -122,7 +122,7 @@ Bot is running. Waiting for updates...
 ## 📁 Project Structure
 
 ```text
-Train tg bot 3/
+pizza-delivery-telegram-bot/
 ├── images/                  # Screenshots used in this README
 ├── .env.example             # Variables template
 ├── .gitignore               # Git exclusions
@@ -311,7 +311,7 @@ python main.py
 ## 📁 Структура проекта
 
 ```text
-Train tg bot 3/
+pizza-delivery-telegram-bot/
 ├── images/                  # Скриншоты для README
 ├── .env.example             # Шаблон переменных
 ├── .gitignore               # Исключения для Git

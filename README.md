@@ -61,7 +61,7 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 
 ```bash
 git clone <YOUR_REPO_URL>
-cd "Train tg bot 3"
+cd pizza-delivery-telegram-bot
 ```
 
 ### 2. Create a virtual environment
@@ -102,7 +102,7 @@ Download the Google Service Account key from Google Cloud Console and place it i
 
 ### 6. Set up Cloudflare Worker
 
-Deploy the Worker (see `docs/cloudflare-worker.md`) or use an existing one. Put the Worker URL in `.env` as `TELEGRAM_API_PROXY_URL`.
+Deploy your Cloudflare Worker or use an existing one. Put the Worker URL in `.env` as `TELEGRAM_API_PROXY_URL`.
 
 ## ▶️ Run
 
@@ -206,7 +206,7 @@ MIT — see [LICENSE](LICENSE).
 
 ## 🎬 Демо
 
-| Главное меню и Выбор языка | выбор пиццы | Выбор размера |
+| Главное меню и Выбор языка | Выбор пиццы | Выбор размера |
 |:---:|:---:|:---:|
 | ![Главное меню](images/screenshot1.png) | ![Выбор языка](images/Screenshot2RUS.png) | ![Выбор размера](images/Screenshot3RUS.png) |
 
@@ -250,7 +250,7 @@ MIT — see [LICENSE](LICENSE).
 
 ```bash
 git clone <URL_вашего_репозитория>
-cd "Train tg bot 3"
+cd pizza-delivery-telegram-bot
 ```
 
 ### 2. Создать виртуальное окружение
@@ -291,7 +291,7 @@ copy .env.example .env
 
 ### 6. Настроить Cloudflare Worker
 
-Разверните Worker по инструкции `docs/cloudflare-worker.md` или используйте существующий. URL воркера укажите в `.env` как `TELEGRAM_API_PROXY_URL`.
+Разверните ваш Worker или используйте существующий. URL воркера укажите в `.env` как `TELEGRAM_API_PROXY_URL`.
 
 ## ▶️ Запуск
 

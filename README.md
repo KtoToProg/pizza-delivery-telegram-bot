@@ -213,11 +213,11 @@ MIT — see [LICENSE](LICENSE).
 
 | Ввод количества | Ввод адреса | Ввод телефона |
 |:---:|:---:|:---:|
-| ![Ввод количества](docs/screenshots/04_quantity.png) | ![Ввод адреса](docs/screenshots/05_address.png) | ![Ввод телефона](docs/screenshots/06_phone.png) |
+| ![Ввод количества](images/Screenshot4RUS.png) | ![Ввод адреса](images/Screenshot5RUS.png) | ![Ввод телефона](images/Screenshot6RUS.png) |
 
 | Проверка заказа | Отмена заказа | Уведомление админу |
 |:---:|:---:|:---:|
-| ![Проверка заказа](docs/screenshots/07_review.png) | ![Отмена заказа](docs/screenshots/08_cancel.png) | ![Уведомление админу](docs/screenshots/09_admin.png) |
+| ![Проверка заказа](images/Screenshot7RUS.png) | ![Отмена заказа](images/Screenshot8RUS.png) | ![Уведомление админу](images/Screenshot9RUS.png) |
 
 ## ✨ Возможности
 

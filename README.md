@@ -29,9 +29,9 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 |:---:|:---:|:---:|
 | ![Review](images/Screenshot7ENG.png) | ![Cancel](images/Screenshot8ENG.png) | ![Admin](images/Screenshot9ENG.png) |
 
-| Order Review |
-|:---:|:---:|:---:|
-| ![Review](images/screenshot10.png) |
+| Google Sheets |
+|:---:|
+| ![](images/screenshot10.png) |
 
 ## ✨ Features
 
@@ -222,6 +222,10 @@ MIT — see [LICENSE](LICENSE).
 | Проверка заказа | Отмена заказа | Уведомление админу |
 |:---:|:---:|:---:|
 | ![Проверка заказа](images/Screenshot7RUS.png) | ![Отмена заказа](images/Screenshot8RUS.png) | ![Уведомление админу](images/Screenshot9RUS.png) |
+
+| Гугл Таблица |
+|:---:|
+| ![](images/screenshot10.png) |
 
 ## ✨ Возможности
 

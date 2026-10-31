@@ -209,7 +209,7 @@ MIT — see [LICENSE](LICENSE).
 
 | Главное меню и выбор пиццы | Выбор языка | Выбор размера |
 |:---:|:---:|:---:|
-| ![Главное меню](docs/screenshots/01_start.png) | ![Выбор языка](docs/screenshots/02_language.png) | ![Выбор размера](docs/screenshots/03_size.png) |
+| ![Главное меню](images/screenshot1.png) | ![Выбор языка](images/Screenshot2RUS.png) | ![Выбор размера](images/Screenshot3RUS.png) |
 
 | Ввод количества | Ввод адреса | Ввод телефона |
 |:---:|:---:|:---:|

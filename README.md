@@ -17,7 +17,7 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 
 ## 🎬 Demo
 
-| Start & Pizza Menu | Language Selection | Size Selection |
+| Start & Language Selection | Pizza Menu | Size Selection |
 |:---:|:---:|:---:|
 | ![Start](images/screenshot1.png) | ![Language](docs/screenshots/02_language.png) | ![Size](docs/screenshots/03_size.png) |
 
@@ -207,7 +207,7 @@ MIT — see [LICENSE](LICENSE).
 
 ## 🎬 Демо
 
-| Главное меню и выбор пиццы | Выбор языка | Выбор размера |
+| Главное меню и Выбор языка | выбор пиццы | Выбор размера |
 |:---:|:---:|:---:|
 | ![Главное меню](images/screenshot1.png) | ![Выбор языка](images/Screenshot2RUS.png) | ![Выбор размера](images/Screenshot3RUS.png) |
 

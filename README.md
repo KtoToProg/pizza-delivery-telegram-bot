@@ -4,6 +4,10 @@
 
 Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and English, logs orders to Google Sheets, notifies the administrator, and uses a Cloudflare Worker as a stable proxy for the Telegram API.
 
+👉 **[Try the bot on Telegram](https://t.me/Delivery_23726_bot)**
+
+> ⚠️ **Note:** This is an educational/test project. The bot might not be online 24/7, as it may run on a local machine or a free tier server. If it doesn't respond right away, please refer to the screenshots below.
+
 ## 📋 Table of Contents
 
 - [Demo](#demo)
@@ -200,6 +204,10 @@ MIT — see [LICENSE](LICENSE).
 # 🍕 Pizza Ordering Telegram Bot
 
 Двуязычный Telegram-бот для заказа пиццы с доставкой. Поддерживает русский и английский языки, сохраняет заказы в Google Sheets, уведомляет администратора и использует Cloudflare Worker как стабильный прокси для Telegram API.
+
+👉 **[Попробовать бота в Telegram](https://t.me/Delivery_23726_bot)**
+
+> ⚠️ **Примечание:** Это учебный/тестовый проект. Бот может быть доступен не круглосуточно, так как запускается локально или на бесплатном сервере. Если он не отвечает, пожалуйста, ориентируйтесь на скриншоты ниже.
 
 ## 📋 Содержание
 

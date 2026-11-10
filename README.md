@@ -1,4 +1,4 @@
-# 🍕 Pizza Ordering Telegram Bot
+# Pizza Ordering Telegram Bot
 
 > 🌐 English version below — Русская версия ниже
 
@@ -8,7 +8,7 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 
 > ⚠️ **Note:** This is an educational/test project. The bot might not be online 24/7, as it may run on a local machine or a free tier server. If it doesn't respond right away, please refer to the screenshots below.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Demo](#demo)
 - [Features](#features)
@@ -39,20 +39,19 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 | ![](images/screenshot10.png) |
 
 <a id="features"></a>
-## ✨ Features
+## Features
 
-- **Bilingual interface (RU/EN)** — switch language at any time via `/language`
-- **Step-by-step ordering** — pizza → size → quantity → address → phone → confirmation
-- **Back navigation** — return to any step to correct data
-- **Order cancellation** — cancel the order at any time before confirmation
-- **Input validation** — quantity, address, and phone are validated with clear error messages in the selected language
-- **Google Sheets logging** — every order is saved with a timestamp
-- **Admin notifications** — new orders are sent to the admin in English with a note about the client's language
-- **Fault tolerance** — multi-layer retry, local backup, and automatic recovery (see [How It Works](#how-it-works))
-- **Cloudflare Worker as a proxy** — stable access to the Telegram API without a local SOCKS proxy
+- **Bilingual interface (RU/EN):** switch the language at any time using `/language`.
+- **Step-by-step ordering:** go through pizza, size, quantity, address, phone, and final confirmation.
+- **Navigation and cancellation:** return to any previous step to fix data, or cancel the order before confirming it.
+- **Input validation:** the bot checks quantity, address, and phone number, showing clear error messages in the chosen language.
+- **Google Sheets logging:** every order is recorded in a spreadsheet with a timestamp.
+- **Admin notifications:** new orders go to the admin in English with a note about the client's language.
+- **Fault tolerance:** handles failures using retries, a local backup file, and automatic recovery (see [How It Works](#how-it-works)).
+- **Cloudflare Worker proxy:** provides stable access to the Telegram API without needing a local SOCKS proxy.
 
 <a id="tech-stack"></a>
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Purpose |
 |-----------|---------|
@@ -63,7 +62,7 @@ Bilingual Telegram bot for ordering pizza with delivery. Supports Russian and En
 | Cloudflare Workers | Telegram API proxy |
 
 <a id="installation"></a>
-## 🚀 Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -106,7 +105,7 @@ Open `.env` and fill in your values following the comments in `.env.example`.
 
 ### 5. Place `credentials.json`
 
-Download the Google Service Account key from Google Cloud Console and place it in the project root next to `main.py`.
+Download the Google Service Account key from Google Cloud Console and place it in the project root next to `bot_code.py`.
 
 ### 6. Set up Cloudflare Worker
 
@@ -116,20 +115,20 @@ Deploy your Cloudflare Worker or use an existing one. Put the Worker URL in `.en
 ## ▶️ Run
 
 ```bash
-python main.py
+python bot_code.py
 ```
 
 Expected output:
 
 ```
-🌐 Using Cloudflare Worker: https://rapid-bar-672d.kto696876.workers.dev
-🔗 API URL: https://rapid-bar-672d.kto696876.workers.dev/bot{0}/{1}
-✅ Connected to Google Sheets
+Using Cloudflare Worker: https://rapid-bar-672d.kto696876.workers.dev
+API URL: https://rapid-bar-672d.kto696876.workers.dev/bot{0}/{1}
+Connected to Google Sheets
 Bot is running. Waiting for updates...
 ```
 
 <a id="project-structure"></a>
-## 📁 Project Structure
+## Project Structure
 
 ```text
 pizza-delivery-telegram-bot/
@@ -138,13 +137,13 @@ pizza-delivery-telegram-bot/
 ├── .gitignore               # Git exclusions
 ├── LICENSE                  # MIT License
 ├── README.md                # This file
-├── main.py                  # Main bot code
+├── bot_code.py                  # Main bot code
 └── requirements.txt         # Python dependencies
 ```
 *(Note: `.env`, `credentials.json`, and `orders_backup.json` are omitted here because they are ignored by Git and only exist locally).*
 
 <a id="how-it-works"></a>
-## ⚙️ How It Works
+## How It Works
 
 ### Bilingualism
 
@@ -180,7 +179,7 @@ Every time the bot starts, `retry_failed_orders()` reads the backup file and tri
 
 Sending to the admin and writing to Google Sheets are handled **independently**. The user always receives their order confirmation, but the message is adjusted based on what actually happened:
 
-- Both OK → `✅ Thank you! Your order has been accepted.`
+- Both OK → `Thank you! Your order has been accepted.`
 - Admin notification failed → `…However, there was a problem notifying the administrator. We will contact you soon.`
 - Sheets write failed → `…Your order has been saved, but there may be a slight delay in processing. The administrator will contact you.`
 
@@ -195,13 +194,13 @@ The main loop is wrapped in `try/except` with a 5-second delay before restart. A
 If Google Sheets cannot be initialized at startup (network, credentials, quota), the bot does **not** crash — it continues to run with `sheet = None`. In this mode, every new order goes straight to the backup file, and admin notifications still work. When the bot restarts and the connection is restored, all pending orders are flushed to Sheets.
 
 <a id="license"></a>
-## 📄 License
+## License
 
 MIT — see [LICENSE](LICENSE).
 
 ---
 
-# 🍕 Pizza Ordering Telegram Bot
+# Pizza Ordering Telegram Bot
 
 Двуязычный Telegram-бот для заказа пиццы с доставкой. Поддерживает русский и английский языки, сохраняет заказы в Google Sheets, уведомляет администратора и использует Cloudflare Worker как стабильный прокси для Telegram API.
 
@@ -209,7 +208,7 @@ MIT — see [LICENSE](LICENSE).
 
 > ⚠️ **Примечание:** Это учебный/тестовый проект. Бот может быть доступен не круглосуточно, так как запускается локально или на бесплатном сервере. Если он не отвечает, пожалуйста, ориентируйтесь на скриншоты ниже.
 
-## 📋 Содержание
+## Содержание
 
 - [Демо](#демо)
 - [Возможности](#возможности)
@@ -240,20 +239,19 @@ MIT — see [LICENSE](LICENSE).
 | ![](images/screenshot10.png) |
 
 <a id="возможности"></a>
-## ✨ Возможности
+## Возможности
 
-- **Двуязычный интерфейс (RU/EN)** — переключение языка в любой момент через `/language`
-- **Пошаговый заказ** — пицца → размер → количество → адрес → телефон → подтверждение
-- **Навигация «назад»** — можно вернуться на любой шаг и исправить данные
-- **Отмена заказа** — можно отменить оформление на любом этапе до подтверждения
-- **Валидация ввода** — количество, адрес и телефон проверяются с понятными ошибками на выбранном языке
-- **Запись в Google Sheets** — все заказы сохраняются в таблицу с меткой времени
-- **Уведомления администратору** — новый заказ приходит в Telegram на английском с пометкой языка клиента
-- **Отказоустойчивость** — многослойная система повторов, локальный резерв и автовосстановление (см. [Как это работает](#как-это-работает))
-- **Cloudflare Worker как прокси** — стабильный доступ к Telegram API без локального SOCKS-прокси
+- **Двуязычный интерфейс (RU/EN):** язык можно переключить в любой момент с помощью команды `/language`.
+- **Пошаговый заказ:** оформление проходит по цепочке от выбора пиццы, размера и количества до ввода адреса, телефона и финального подтверждения.
+- **Навигация и отмена:** можно вернуться на любой предыдущий шаг, чтобы поправить данные, или отменить заказ до его подтверждения.
+- **Проверка ввода:** бот проверяет количество, адрес и номер телефона, выводя понятные сообщения об ошибках на выбранном языке.
+- **Запись в Google Sheets:** каждый заказ сохраняется в таблицу с отметкой времени.
+- **Уведомления администратору:** новые заказы приходят админу на английском языке с пометкой, какой язык выбрал клиент.
+- **Отказоустойчивость:** бот справляется со сбоями с помощью повторных попыток, локального резервного файла и автовосстановления (подробнее в разделе [Как это работает](#как-это-работает)).
+- **Прокси через Cloudflare Worker:** обеспечивает стабильный доступ к Telegram API без использования локального SOCKS-прокси.
 
 <a id="технологии"></a>
-## 🛠️ Технологии
+## Технологии
 
 | Компонент | Назначение |
 |-----------|-----------|
@@ -264,7 +262,7 @@ MIT — see [LICENSE](LICENSE).
 | Cloudflare Workers | Прокси для Telegram API |
 
 <a id="установка"></a>
-## 🚀 Установка
+## Установка
 
 ### 1. Клонировать репозиторий
 
@@ -307,7 +305,7 @@ copy .env.example .env
 
 ### 5. Положить `credentials.json`
 
-Скачайте ключ Google Service Account из Google Cloud Console и положите его в корень проекта рядом с `main.py`.
+Скачайте ключ Google Service Account из Google Cloud Console и положите его в корень проекта рядом с `bot_code.py`.
 
 ### 6. Настроить Cloudflare Worker
 
@@ -317,20 +315,20 @@ copy .env.example .env
 ## ▶️ Запуск
 
 ```bash
-python main.py
+python bot_code.py
 ```
 
 Ожидаемый вывод:
 
 ```
-🌐 Используем Cloudflare Worker: https://rapid-bar-672d.kto696876.workers.dev
-🔗 API URL: https://rapid-bar-672d.kto696876.workers.dev/bot{0}/{1}
-✅ Подключение к Google Sheets успешно
+Используем Cloudflare Worker: https://rapid-bar-672d.kto696876.workers.dev
+API URL: https://rapid-bar-672d.kto696876.workers.dev/bot{0}/{1}
+Подключение к Google Sheets успешно
 Бот запущен. Ожидание обновлений...
 ```
 
 <a id="структура-проекта"></a>
-## 📁 Структура проекта
+## Структура проекта
 
 ```text
 pizza-delivery-telegram-bot/
@@ -339,13 +337,13 @@ pizza-delivery-telegram-bot/
 ├── .gitignore               # Исключения для Git
 ├── LICENSE                  # MIT License
 ├── README.md                # Этот файл
-├── main.py                  # Основной код бота
+├── bot_code.py                  # Основной код бота
 └── requirements.txt         # Зависимости Python
 ```
 *(Примечание: `.env`, `credentials.json` и `orders_backup.json` отсутствуют в репозитории, так как добавлены в `.gitignore` и существуют только локально).*
 
 <a id="как-это-работает"></a>
-## ⚙️ Как это работает
+## Как это работает
 
 ### Двуязычность
 
@@ -381,7 +379,7 @@ telebot.apihelper.API_URL = f"{TELEGRAM_API_PROXY_URL}/bot{{0}}/{{1}}"
 
 Уведомление админа и запись в Google Sheets обрабатываются **независимо**. Пользователь всегда получает подтверждение заказа, но текст сообщения адаптируется под реальную ситуацию:
 
-- Всё успешно → `✅ Спасибо! Ваш заказ принят.`
+- Всё успешно → `Спасибо! Ваш заказ принят.`
 - Уведомление админу не ушло → `…Но возникла проблема с уведомлением администратора. Мы скоро свяжемся с вами.`
 - Запись в Sheets не удалась → `…Ваш заказ сохранён, но возможна небольшая задержка в обработке. Администратор свяжется с вами.`
 
@@ -396,6 +394,6 @@ telebot.apihelper.API_URL = f"{TELEGRAM_API_PROXY_URL}/bot{{0}}/{{1}}"
 Если Google Sheets не удаётся инициализировать при запуске (сеть, ключ, квота), бот **не падает** — он продолжает работать с `sheet = None`. В этом режиме каждый новый заказ идёт сразу в резервный файл, а уведомления админу продолжают работать. При следующем запуске, когда соединение восстановится, все накопленные заказы уйдут в Sheets.
 
 <a id="лицензия"></a>
-## 📄 Лицензия
+## Лицензия
 
 MIT — см. [LICENSE](LICENSE).
